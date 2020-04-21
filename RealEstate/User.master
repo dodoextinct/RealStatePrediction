@@ -1,0 +1,104 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="User.master.cs" Inherits="User" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title>:: Welcome To Real Estate  ::</title>
+<style type="text/css">
+    BODY,TABLE,INPUT {font-size:12px;font-weight:bold}
+    A {color:blue}
+    A:hover{color:red}
+</style>
+<script language=javascript>
+    function numValid()
+    {
+        var asc = window.event.keyCode;
+        if( (asc>=48 && asc<=57) || asc==13)
+            return true;
+        else
+            return false;
+    }
+</script>
+</head>
+<body style="margin:0" link=blue alink=blue vlink=blue>
+    <form id="form1" runat="server">
+    <div>
+        <table style="width: 100%" border=1>
+            <tr>
+                <td align="center" background="../Images/Back.jpg" colspan=2>
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Images/Title.jpg" /></td>
+            </tr>
+            <tr>
+                <td colspan=2>
+                <table width=100%>
+                <tr>
+                <td>
+                    <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx" Width="41px">Home</asp:HyperLink>You are logged in as 
+                    <asp:Label ID="lblUser" runat="server"></asp:Label></td>
+                <td align=right>
+                    <asp:LinkButton ID="lnkChngPwd" runat="server" CausesValidation="False" PostBackUrl="~/ChnagePwd.aspx"
+                        Style="text-align: center" Width="118px">Change Password</asp:LinkButton>
+                    <asp:LinkButton ID="lnkRequest" runat="server" CausesValidation="False" PostBackUrl="~/RequestView.aspx"
+                        Style="text-align: center" Width="66px">Request</asp:LinkButton>
+                    <asp:LinkButton ID="lnkRegister" runat="server" CausesValidation="False" PostBackUrl="~/SignUp.aspx"
+                        Style="text-align: center" Width="66px">Register</asp:LinkButton>
+                    <asp:LinkButton ID="lnkLogin" runat="server" CausesValidation="False" OnClick="lnkLogin_Click"
+                        Style="text-align: center" Width="60px">Login</asp:LinkButton>&nbsp;
+                </td>
+                </tr>
+                </table>
+                
+                </td>
+            </tr>
+            <tr>
+                <td align=left valign=top width=15%>
+                <table width=100%>
+                <tr height=10>
+                <td bgcolor=inactivecaptiontext style="font-size:14px; width: 165px; height: 10px;">Estate Area</td>
+                </tr>
+                <tr>
+                <td height=240 valign=top bgcolor=inactivecaptiontext style="width: 165px">
+                    <asp:Panel ID="Panel1" runat="server" Height="200px" ScrollBars="Vertical" Width="90%">
+                    <asp:DataList ID="DataList1" runat="server" BackColor="LightGoldenrodYellow" BorderColor="Tan"
+                        BorderWidth="1px" CellPadding="2" DataSourceID="SqlDataSource1" ForeColor="Black" Width="100%" OnItemCommand="DataList1_ItemCommand">
+                        <FooterStyle BackColor="Tan" />
+                        <SelectedItemStyle BackColor="DarkSlateBlue" ForeColor="GhostWhite" />
+                        <ItemTemplate>
+                            <asp:LinkButton ID="LinkButton1" runat="server" CommandArgument='<%# Eval("Area") %>'
+                                Text='<%# Eval("Area") %>' CausesValidation="False"></asp:LinkButton><br />
+                        </ItemTemplate>
+                        <AlternatingItemStyle BackColor="PaleGoldenrod" />
+                        <HeaderStyle BackColor="Tan" Font-Bold="True" />
+                    </asp:DataList></asp:Panel>
+                    <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\RealEstate.mdf;Integrated Security=True;User Instance=True"
+                        ProviderName="System.Data.SqlClient" SelectCommand="SELECT DISTINCT [Area] FROM [Estate_Master] ORDER BY [Area]">
+                    </asp:SqlDataSource>
+                </td>
+                </tr>
+                <tr>
+                <td height=80 style="width: 165px">
+                <marquee direction=up onmouseover="javascript:this.stop();" onmouseout="javascript:this.start();" scrollamount=3>
+                Latest News
+                New Estate
+                1.
+                2.
+                3.</marquee>
+                </td>
+                </tr>
+                </table>
+                </td>
+                <td style="vertical-align:text-top;text-align:center">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td colspan=2>&copy; All right reserved 2007-08. Contact : <a href="mailto:realestate@yahoo.co.in">realestate@yahoo.co.in</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
+</body>
+</html>
